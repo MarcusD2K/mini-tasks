@@ -3,6 +3,16 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 require("dotenv").config();
 
+if (!process.env.MONGODB_URI) {
+  console.error("❌ Missing MONGODB_URI env var. Set it on Render (Environment tab).");
+  process.exit(1);
+}
+
+console.log("✅ Server starting...");
+console.log("PORT:", process.env.PORT || 8080);
+console.log("CORS origins:", process.env.ALLOW_ORIGIN || "*");
+
+
 const app = express();
 app.use(express.json());
 app.use(
